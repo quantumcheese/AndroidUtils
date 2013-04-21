@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+    <module name="SuppressionFilter">
+        <property name="file" value="${samedir}/suppressions.xml" />
+    </module>
+
+    <!-- Whitespace checks -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+<!--
+    <module name="JavadocPackage"/>
+-->
+    <module name="TreeWalker">
+        <module name="ConstantName"/>
+        <module name="AvoidStarImport"/>
+        <module name="EmptyBlock"/>
+        <module name="ExplicitInitialization"/>
+
+        <!-- Design checks -->
+        <module name="FinalClass"/>
+        <module name="InterfaceIsType"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="MutableException"/>
+
+        <!-- Miscellaneous checks -->
+        <module name="UpperEll" />
+
+        <!--Regexp checks -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="\s+$"/>
+            <property name="message" value="Trailing whitespace"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+
+
+        <!-- Coding checks -->
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+
+        <!-- Import checks -->
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Modifier checks -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+
+
+    </module>
+</module>
+
