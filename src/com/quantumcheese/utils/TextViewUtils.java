@@ -35,4 +35,12 @@ public final class TextViewUtils {
     public static boolean editTextIsEmpty(final EditText textField) {
         return 0 == textField.getText().toString().length();
     }
+
+    public static TextView findTextViewById(final View view, final int id) {
+        final View found = view.findViewById(id);
+        if (TextView.class.isInstance(found)) {
+            return (TextView) found;
+        }
+        return null;
+    }
 }
