@@ -1,6 +1,10 @@
 package com.quantumcheese.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.IBinder;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,5 +46,19 @@ public final class TextViewUtils {
             return (TextView) found;
         }
         return null;
+    }
+
+    public static void dismissKeyboard(final Activity activity) {
+        dismissKeyboard(activity, activity.getWindow().getAttributes().token);
+    }
+
+    public static void dismissKeyboard(final Activity activity, final View view) {
+        dismissKeyboard(activity, view.getWindowToken());
+    }
+
+    private static void dismissKeyboard(final Activity activity, final IBinder token) {
+        final InputMethodManager inputManager = (InputMethodManager) activity
+            .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }
