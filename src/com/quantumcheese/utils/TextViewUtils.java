@@ -13,26 +13,26 @@ public final class TextViewUtils {
     private TextViewUtils() {
     }
 
-    private static String concatenateStrings(final String... strings) {
+    private static CharSequence concatenateStrings(final CharSequence... strings) {
         if (1 == strings.length) {
             return strings[0];
         } else {
             final StringBuilder sb = new StringBuilder();
-            for (final String line : strings) {
+            for (final CharSequence line : strings) {
                 sb.append(line);
             }
             return sb.toString();
         }
     }
 
-    public static void setText(final View parent, final int targetResourceId, final String... strings) {
-        final String text = concatenateStrings(strings);
+    public static void setText(final View parent, final int targetResourceId, final CharSequence... strings) {
+        final CharSequence text = concatenateStrings(strings);
         final TextView tv = (TextView) parent.findViewById(targetResourceId);
         tv.setText(text);
     }
 
-    public static void setText(final TextView tv, final String... strings) {
-        final String text = concatenateStrings(strings);
+    public static void setText(final TextView tv, final CharSequence... strings) {
+        final CharSequence text = concatenateStrings(strings);
         tv.setText(text);
     }
 
