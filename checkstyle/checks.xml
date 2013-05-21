@@ -7,6 +7,16 @@
     <module name="SuppressionFilter">
         <property name="file" value="${samedir}/suppressions.xml" />
     </module>
+    <module name="SuppressionCommentFilter">
+        <property name="onCommentFormat" value="&lt;checkstyle module=&quot;([\w\|]+)&quot;&gt;"/>
+        <property name="offCommentFormat" value="&lt;/checkstyle module=&quot;([\w\|]+)&quot;&gt;"/>
+        <property name="checkFormat" value="$1"/>
+    </module>
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
+        <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+        <property name="checkFormat" value="$1"/>
+    </module>
 
     <!-- Whitespace checks -->
     <module name="FileTabCharacter">
@@ -14,6 +24,8 @@
     </module>
 
     <module name="TreeWalker">
+        <!-- required for comment-based suppression -->
+        <module name="FileContentsHolder"/>
         <!-- Annotation checks -->
         <module name="MissingOverride"/>
 
@@ -22,7 +34,11 @@
         <module name="EmptyBlock"/>
 
         <!-- Design checks -->
-        <module name="VisibilityModifier"/>
+        <module name="VisibilityModifier">
+            <property name="packageAllowed" value="true"/>
+            <property name="protectedAllowed" value="true"/>
+            <property name="publicMemberPattern" value="^[A-Z][A-Z0-9_]*$"/>
+        </module>
         <module name="FinalClass"/>
         <module name="InterfaceIsType"/>
         <module name="HideUtilityClassConstructor"/>
