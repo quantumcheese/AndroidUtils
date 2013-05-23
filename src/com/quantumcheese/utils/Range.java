@@ -1,18 +1,18 @@
 package com.quantumcheese.utils;
 
 public final class Range {
-    public static final Range EMPTY_RANGE = new Range(0, 0);
+    public static final Range EMPTY_RANGE = new Range(Long.MAX_VALUE, 0);
 
     /**
      * The first index.
      */
-    private final int start;
+    private final long start;
     /**
      * The number of items in the range (0 is valid).
      */
-    private final int extent;
+    private final long extent;
 
-    public Range(final int location, final int length) {
+    public Range(final long location, final long length) {
         if (location < 0) {
             throw new IllegalArgumentException("Cannot have a range with a negative start:" + location);
         }
@@ -29,27 +29,27 @@ public final class Range {
      * @param h The highest number in the range.
      * @return A Range from l to h, inclusive.
      */
-    public static Range rangeFromLocations(final int l, final int h) {
+    public static Range rangeFromLocations(final long l, final long h) {
         if (l < 0) {
             throw new IllegalArgumentException("Cannot have a range with a negative index:" + l);
         }
         if (h < 0) {
             throw new IllegalArgumentException("Cannot have a range with a negative index:" + h);
         }
-        final int low = Math.min(l,  h);
-        final int high = Math.max(l, h);
+        final long low = Math.min(l,  h);
+        final long high = Math.max(l, h);
         return new Range(low, high - low + 1);
     }
 
-    public int getStart() {
+    public long getStart() {
         return start;
     }
 
-    public int getExtent() {
+    public long getExtent() {
         return extent;
     }
 
-    public boolean contains(final int i) {
+    public boolean contains(final long i) {
         return start <= i && i < start + extent;
     }
 }
