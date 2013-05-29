@@ -52,4 +52,11 @@ public final class Range {
     public boolean contains(final long i) {
         return start <= i && i < start + extent;
     }
+
+    /**
+     * @return "one past the end" of the range.
+     */
+    public long getMax() {
+        return start + extent;
+    }
 }
