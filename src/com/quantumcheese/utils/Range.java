@@ -14,10 +14,10 @@ public final class Range {
 
     public Range(final long location, final long length) {
         if (location < 0) {
-            throw new IllegalArgumentException("Cannot have a range with a negative start:" + location);
+            throw new IllegalArgumentException("Cannot have a range with a negative start: " + location);
         }
         if (length < 0) {
-            throw new IllegalArgumentException("Cannot have a range with a negative length:" + length);
+            throw new IllegalArgumentException("Cannot have a range with a negative length: " + length);
         }
         this.start = location;
         this.extent = length;
@@ -31,10 +31,10 @@ public final class Range {
      */
     public static Range rangeFromLocations(final long l, final long h) {
         if (l < 0) {
-            throw new IllegalArgumentException("Cannot have a range with a negative index:" + l);
+            throw new IllegalArgumentException("Cannot have a range with a negative index: " + l);
         }
         if (h < 0) {
-            throw new IllegalArgumentException("Cannot have a range with a negative index:" + h);
+            throw new IllegalArgumentException("Cannot have a range with a negative index: " + h);
         }
         final long low = Math.min(l,  h);
         final long high = Math.max(l, h);
@@ -59,4 +59,19 @@ public final class Range {
     public long getMax() {
         return start + extent;
     }
+
+    /**
+     * @return The range where this and range intersect,
+     *  or a range with length 0 if they do not intersect.
+     */
+    Range intersectionRange(final Range range) {
+        if (getMax() < range.start
+            || range.getMax() < start) {
+            return EMPTY_RANGE;
+        }
+        final long loc = Math.max(start, range.getStart());
+        final long len = Math.min(getMax(), range.getMax()) - loc;
+        return new Range(loc, len);
+    }
+
 }
